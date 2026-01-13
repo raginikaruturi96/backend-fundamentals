@@ -75,7 +75,7 @@ The value of the PromiseStatus, the state, can be one of three values:
 
 A promise is typically created using the Promise constructor, which takes a callback function with resolve and reject parameters. The asynchronous operation is performed inside this callback.
  
-[Detailed working of process] (https://medium.com/@lydiahallie/javascript-visualized-promises-async-await-a3f1aad8a943)
+[Detailed working of process](https://medium.com/@lydiahallie/javascript-visualized-promises-async-await-a3f1aad8a943)
 
 # NPM/Yarn project management
 
@@ -85,8 +85,8 @@ A promise is typically created using the Promise constructor, which takes a call
 -  NPM follows a non-deterministic algorithm, which means that it may install different versions of packages for different users or on different machines. This can lead to potential compatibility issues. In contrast, Yarn uses a deterministic algorithm that guarantees the same package versions will be installed across all environments. 
 - yarn offers parallel installation of packages which are not dependent in threads. It can lower installation time to 1/10 of time from npm install
 - Yarn also provides offline installation support, allowing developers to install packages without an internet connection, provided the packages are already present in the local cache.
-- [Reference1] (https://stackoverflow.com/questions/50278553/what-is-main-difference-between-yarn-and-npm)
-- [Reference2] (https://medium.com/@shunya.ekaya01/understanding-the-difference-between-npm-and-yarn-26b4cf1405f0)
+- [Reference1](https://stackoverflow.com/questions/50278553/what-is-main-difference-between-yarn-and-npm)
+- [Reference2](https://medium.com/@shunya.ekaya01/understanding-the-difference-between-npm-and-yarn-26b4cf1405f0)
 
 ## Dependencies vs Devdependecies
 - `Dependencies`: libraries that your project needs in order to run in production
