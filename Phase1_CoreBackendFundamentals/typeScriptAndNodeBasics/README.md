@@ -74,8 +74,31 @@ The value of the PromiseStatus, the state, can be one of three values:
 - pending: The promise has neither resolved nor rejected
 
 A promise is typically created using the Promise constructor, which takes a callback function with resolve and reject parameters. The asynchronous operation is performed inside this callback.
- 
-[Detailed working of process](https://medium.com/@lydiahallie/javascript-visualized-promises-async-await-a3f1aad8a943)
+ [Detailed working of process](https://medium.com/@lydiahallie/javascript-visualized-promises-async-await-a3f1aad8a943)
+
+**Static Methods**
+- `Promise.resolve()`
+    - resolves a give value to a promise
+    - if the value is a promise, that promise is returned
+    - if the value is a thenable, Promise.resolve() will call the then() method with two callbacks it prepared; otherwise the returned promise will be fulfilled with the value
+- `Promise.reject()`
+    - returns a Promise object that is rejected with a given reason
+ - `Promise.all()` 
+    - static method takes an iterable of promises as input and returns a single Promise
+    - It rejects when any of the input's promises rejects, with this first rejection reason.
+    - If the iterable contains non-promise values, they will be ignored, but still counted in the returned promise array value
+- `Promise.allsettled()`
+    - takes an iterable of promises as input and Returns an array of objects showing success or failure for each.
+    - care about every promise’s outcome, even if some fail.
+    - returns status, value/ reason for each of the promise
+- `Promise.race()`
+    - takes an iterable of promises as input and returns a single Promise. This returned promise settles with the eventual state of the first promise that settles.
+    -  It's useful when you want the first async task to complete, but do not care about its eventual state (i.e., it can either succeed or fail).
+- `Promise.any()`
+    - takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when any of the input's promises fulfills, with this first fulfillment value
+    - Resolves as soon as any promise succeeds, Only rejects if all promises reject
+[Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+
 
 # NPM/Yarn project management
 
@@ -100,7 +123,7 @@ npm install <package name> --save-dev
 ```
 
 ## Common NPM scripts
-
+[Reference](https://dev.to/ajitforger97/useful-npm-scripts-example-usage-2kha)
 
 ## dotenv
 dotenv is a library that loads environment variables from a .env file into process.env (Node.js), keeping secrets out of your code for better security and easier configuration management across different environments
@@ -111,6 +134,23 @@ To use it
 - access them via process.env.KEY 
 
 > Remember to add .env to your .gitignore. 
+
+### Creating .env files using CLI
+To create 
+```
+touch .env.dev .env.prod .env.example
+```
+
+To add environment variables
+Syntax : echo "environment variable" >> filename
+
+example:
+```
+echo "PORT=3000" >> .env.dev
+echo "DB_URL=mongodb://localhost:27017/devdb" >> .env.dev
+echo "DEBUG=true" >> .env.dev
+```
+
 
 ## Nodemon
 Nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected.
@@ -151,22 +191,22 @@ In a REST API, HTTP methodsdefine the action a client wants to perform on a reso
 
 ## HTTP status codes
 **2xx – Success**
-200	OK
-201	Created
-204	No Content
+- 200	OK
+- 201	Created
+- 204	No Content
 
 **4xx – Client Errors**
-400	Bad request
-401	Unauthorized
-403	Forbidden
-404	Not found
-409	Conflict
-422	Validation error
+- 400	Bad request
+- 401	Unauthorized
+- 403	Forbidden
+- 404	Not found
+- 409	Conflict
+- 422	Validation error
 
 **5xx – Server Errors**
-500	Internal Server Error
-502	Bad Gateway
-503	Service Unavailable
+- 500	Internal Server Error
+- 502	Bad Gateway
+- 503	Service Unavailable
 
 ## Idempotency
 An operation is idempotent if repeating it multiple times produces the same result.
