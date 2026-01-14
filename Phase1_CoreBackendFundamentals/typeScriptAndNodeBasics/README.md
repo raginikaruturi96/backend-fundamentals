@@ -14,7 +14,7 @@ Typescript enforces type rules in our Javascript code. This allows us to catch a
 > `npx` is often used to run the tsc command if TypeScript is installed as a local dependency in your project. It finds the tsc executable within your project's node_modules/.bin directory and runs it, saving you from needing a global installation. 
 
 #### Resources
-- [Typescript Documentation] (https://www.typescriptlang.org/docs/handbook/)
+- [Typescript Documentation](https://www.typescriptlang.org/docs/handbook/)
 - [Setting up typescript node project](https://khalilstemmler.com/blogs/typescript/node-starter-project/)
 - [Setting up typescript node project includes express](https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript)
 - [Adding typescript to nodejs project](https://medium.com/geekculture/adding-typescript-to-your-node-js-project-fe4ba08369c8)
@@ -127,7 +127,7 @@ Global installation:
 npm install -g nodemon
 ```
 
-[Reference] (https://userjot.com/blog/understanding-nodemon-for-nodejs-development)
+[Reference](https://userjot.com/blog/understanding-nodemon-for-nodejs-development)
 
 
 ### Functions of nodemon
@@ -136,7 +136,7 @@ npm install -g nodemon
 - Supports Various File Types: Nodemon isn’t limited to just JavaScript files. It can also monitor changes in JSON files, CSS files, HTML files 
 - Customizable: You have the flexibility to configure Nodemon to watch specific files or directories, ignore certain paths, or even run custom scripts when your application restarts
 
-[Documentation] (https://www.npmjs.com/package/nodemon)
+[Documentation](https://www.npmjs.com/package/nodemon)
 
 # REST API Principles
 
