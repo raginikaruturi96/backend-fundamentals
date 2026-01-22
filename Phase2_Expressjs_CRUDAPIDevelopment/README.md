@@ -114,6 +114,89 @@ Request validation and sanitization ensure that APIs receive correct, safe, and 
 
 ## Git and Documentation Practices
 
-### Branching and versioning standards
-[Version Control Branching Strategies](https://medium.com/@dmosyan/version-control-branching-strategies-e68e8d5ef1e0)
+### Branching
+A standardized way to manage branches in a Git repository so that multiple developers can work together in a structured way. It’s not specific to any programming language or framework; it applies whenever you are using Git for team development.
+
+#### Why Branching Strategy Matters
+In team development:
+- many developers work concurrently
+- new features, bug fixes, and patches are developed in parallel
+- you need a safe way to integrate work without breaking the main codebase
+
+A branching strategy defines:
+- which branches exist
+- how they’re used
+- how and when they merge into other branches
+This reduces conflicts and coordination issues in team workflows
+
+#### Main Branches in the Strategy
+
+**master**
+- Contains the latest delivered development changes for upcoming releases
+- Developers branch off of master to build features
+
+**stable**
+- Represents the production code — what is currently deployed
+- Only accepts changes after formal deployment from master
+- Acts as a stable snapshot for live systems with versions and releases tagged against it
+
+#### Supporting Branches
+Supporting branches are temporary branches created for specific purposes. They allow isolated work without affecting other ongoing work.
+
+**Feature branches**
+- Used for developing new features or enhancements
+- Created from the main working branch (master in this model)
+- Branch must always be kept up-to-date with the base branch to avoid merge conflicts
+- When complete, merged back to master
+
+```
+git checkout -b feature-id master                 // creates a local branch for the new feature
+git push origin feature-id                        // makes the new feature remotely available
+git merge master                                  // merges changes from master into feature branch
+git checkout master                               // change to the master branch  
+git merge --no-ff feature-id                      // makes sure to create a commit object during merge
+git push origin master                            // push merge changes
+git push origin :feature-id                       // deletes the remote branch
+```
+
+**Bug branches**
+- Similar to feature branches but created specifically for bug fixes
+- Branch off from the main working branch
+- Typically short-lived, focused on fixing a specific issue
+- Gets merged back into the working branch once fixed
+
+**Hotfix branches**
+- Used for urgent fixes in live production (“hotfixes”)
+- Created off of stable (the production branch), not the working branch
+- After the fix is ready, merged into stable with a version tag
+- merged back into master so the fix isn’t lost in the next development cycle
+
+[Branching Strategies](https://gist.github.com/digitaljhelms/4287848)
+
+### Versioning 
+GitHub Docs uses a single source approach for documentation that can apply to multiple products (like different GitHub plans or Enterprise versions) without duplicating content. This means one Markdown file can serve several versions of the documentation.
+
+#### How it works
+- **YAML frontmatter**: At the top of each doc file, metadata called frontmatter defines which versions the content applies to.
+- **Liquid conditionals**: Inside the document text, special tags ({% ifversion … %}) let you include or exclude content for specific versions. For example, content that only applies to GitHub Enterprise Server can be wrapped in a version conditional.
+-This versioning system ensures users see the right documentation for the exact product/version they are using, while saving writers from maintaining separate files for every version.
+[Versioning Doc](https://docs.github.com/en/contributing/writing-for-github-docs/versioning-documentation)
+
+### Clear Commit Message Rules
+Good commit messages help teams understand history
+
+- type — describes the change category (e.g., feat, fix, docs, refactor, test, chore).
+- short description — imperative tense, concise (often ≤50 chars)
+
+**Common Conventions**
+- feat: new feature
+- fix: bug fix
+- docs: documentation changes
+- style: formatting/white‑space (no logic change)
+- refactor: code restructuring (no behavior change)
+- perf: performance improvement
+- test: adding/updating tests
+- chore: maintenance or build tool changes
+
+
 

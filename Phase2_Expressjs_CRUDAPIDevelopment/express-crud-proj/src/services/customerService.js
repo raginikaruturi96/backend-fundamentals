@@ -18,9 +18,9 @@ exports.updateCustomer = (id, data) => {
   const customer = customers.find(c => c.id == id);
   if (!customer) return null;
 
-  customer.name = data.name ?? customer.name;
-  customer.email = data.email ?? customer.email;
-  customer.age = data.age ?? customer.age;
+  customer.name = data.name;
+  customer.email = data.email;
+  customer.age = data.age;
 
   return customer;
 };
