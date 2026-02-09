@@ -1,6 +1,5 @@
-import pkg from "pg";
-const { Pool } = pkg;
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
+const { Pool } = require("pg");
 
 dotenv.config();
 
@@ -16,4 +15,4 @@ pool.on("connect", () => {
   console.log("PostgreSQL connected");
 });
 
-export default pool;
+module.exports = pool;

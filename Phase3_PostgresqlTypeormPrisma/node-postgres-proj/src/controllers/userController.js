@@ -1,7 +1,7 @@
-import * as userService from "../services/userService.js";
+const userService = require("../services/userService.js");
 
 // CREATE
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { name, email } = req.body;
     const user = await userService.createUser(name, email);
@@ -12,7 +12,7 @@ export const createUser = async (req, res) => {
 };
 
 // READ ALL
-export const getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
     const users = await userService.getAllUsers();
     res.json(users);
@@ -22,7 +22,7 @@ export const getUsers = async (req, res) => {
 };
 
 // READ BY ID
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const user = await userService.getUserById(req.params.id);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -33,7 +33,7 @@ export const getUser = async (req, res) => {
 };
 
 // UPDATE
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const { name, email } = req.body;
     const user = await userService.updateUser(
@@ -49,7 +49,7 @@ export const updateUser = async (req, res) => {
 };
 
 // DELETE
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     const user = await userService.deleteUser(req.params.id);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -57,4 +57,12 @@ export const deleteUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+module.exports = {
+  createUser,
+  getUsers, 
+  getUser,
+  updateUser,
+  deleteUser,
 };
