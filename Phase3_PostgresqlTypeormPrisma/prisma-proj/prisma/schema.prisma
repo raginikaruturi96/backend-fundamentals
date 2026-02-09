@@ -14,9 +14,42 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
-  email     String
+  email     String    @unique
+  createdAt DateTime  @default(now())
+
+  profile   Profile?
+
+  posts     Post[]
+
+  groups    Group[]
+}
+
+model Profile {
+  id      Int    @id @default(autoincrement())
+  bio     String
+  userId  Int    @unique
+
+  user    User   @relation(fields: [userId], references: [id])
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  userId    Int
+
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model Group {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+
+  users  User[]
+}
+
 

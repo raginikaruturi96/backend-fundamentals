@@ -68,3 +68,99 @@ const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+app.post('/users-with-profile', async (req, res) => {
+  const { name, email, bio } = req.body;
+  try {
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        profile: {
+          create: { bio },
+        },
+      },
+      include: { profile: true },
+    });
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create user with profile' });
+  }
+});
+
+app.post('/users/:userId/posts', async (req, res) => {
+  const userId = Number(req.params.userId);
+  const { title, content } = req.body;
+  try {
+    const post = await prisma.post.create({
+      data: {
+        title,
+        content,
+        user: { connect: { id: userId } },
+      },
+    });
+    res.status(201).json(post);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create post' });
+  }
+});
+
+app.post('/groups', async (req, res) => {
+  const { name } = req.body;
+  try {
+    const group = await prisma.group.create({
+      data: { name },
+    });
+    res.status(201).json(group);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create group' });
+  }
+});
+
+app.post('/users/:userId/groups/:groupId', async (req, res) => {
+  const userId = Number(req.params.userId);
+  const groupId = Number(req.params.groupId);
+  try {
+    const user = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        groups: {
+          connect: { id: groupId },
+        },
+      },
+      include: { groups: true },
+    });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to add user to group' });
+  }
+});
+
+app.get('/groups', async (req, res) => {
+  try {
+    const groups = await prisma.group.findMany({
+      include: { users: true },
+    });
+    res.json(groups);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch groups' });
+  }
+});
+
+app.get('/users/:id/full', async (req, res) => {
+  const id = Number(req.params.id);
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        profile: true,
+        posts: true,
+        groups: true,
+      },
+    });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch user with relations' });
+  }
+});
