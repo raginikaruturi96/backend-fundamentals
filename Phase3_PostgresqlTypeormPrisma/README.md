@@ -1,5 +1,8 @@
 # PostgreSQL and TypeORM & Prisma Integration
 
+## Prisma
+- migration command `npx prisma migrate dev --name init`
+
 # Testing
 ## Jest
 Jest is a JavaScript testing framework developed by Facebook
