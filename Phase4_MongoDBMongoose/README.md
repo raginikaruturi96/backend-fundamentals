@@ -7,7 +7,7 @@
 ## RDBMS Vs MongoDB
 - Schema: Relational databases require a fixed schema, meaning the structure of the data must be defined upfront. MongoDB supports a dynamic schema, enabling documents in the same collection to have different fields and data types
 
--  Scalabitlity: Relational databases are typically vertically scalable, requiring more powerful hardware to handle increased load. MongoDB is horizontally scalable, allowing the addition of more servers to distribute the load.
+- Scalabitlity: Relational databases are typically vertically scalable, requiring more powerful hardware to handle increased load. MongoDB is horizontally scalable, allowing the addition of more servers to distribute the load.
 
 - MongoDB does not support joins natively; relationships are often embedded within documents or handled at the application level.
 
@@ -32,7 +32,7 @@ MongoDB provides multiple approaches for performing aggregation depending on the
 It Groups documents by the "_id" field 
 ```
 db.users.aggregate([
-  { $group: { _id: "$city", totalUsers: { $sum: 1 } } }
+  { $group: { _id: "$city", totalUsers: { $sum:  } } }
 ])
 ```
 - `$sum : 1` adds a value of one for each document
